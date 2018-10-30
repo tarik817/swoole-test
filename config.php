@@ -8,7 +8,7 @@ return [
         // App Settings
         'app'                    => [
             'name' => 'IoT gathering',
-            'url'  => 'http://192.168.10.5:9093',
+            'url'  => 'http://127.0.0.1:9501',
             'env'  => 'local',
         ],
 

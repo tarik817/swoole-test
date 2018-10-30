@@ -27,19 +27,19 @@
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Location</th>
                         <th>Date</th>
+                        <th>Location</th>
                         <th>Temperature</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>From robot</td>
-                        <td>21-09-2018</td>
-                        <td>22.1 C</td>
-                    </tr>
+					<?php foreach ($results as $row) : ?>
+                        <tr>
+                            <td><?= $row['date']; ?></td>
+                            <td><?= $row['location']; ?></td>
+                            <td><?= $row['temperature']; ?></td>
+                        </tr>
+					<?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -67,14 +67,14 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            labels: <?= json_encode($labels); ?>,
             datasets: [{
-                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-                lineTension: 0,
+                data: <?= json_encode($coordinates); ?>,
+                lineTension: 0.3,
                 backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
+                borderColor: '#ff992f',
+                borderWidth: 5,
+                pointBackgroundColor: '#ff2b21'
             }]
         },
         options: {

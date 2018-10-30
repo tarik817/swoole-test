@@ -30,7 +30,7 @@ $bridgeManager = new BridgeManager($app);
 /**
  * We start the Swoole server
  */
-$http = new swoole_http_server("127.0.0.5", 9501);
+$http = new swoole_http_server("127.0.0.1", 9501);
 
 /**
  * We register the on "start" event
