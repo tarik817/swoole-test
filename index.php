@@ -18,11 +18,7 @@ require __DIR__ . '/routes.php';
 
 
 $app->add(function (Http\Request $request, Http\Response $response, callable $next) {
-    $response->getBody()->write('BEFORE' . PHP_EOL);
-
     $response = $next($request, $response);
-    $response->getBody()->write(PHP_EOL . 'AFTER');
-
     return $response;
 });
 
@@ -34,7 +30,7 @@ $bridgeManager = new BridgeManager($app);
 /**
  * We start the Swoole server
  */
-$http = new swoole_http_server("192.168.10.5", 8087);
+$http = new swoole_http_server("127.0.0.1", 9093);
 
 /**
  * We register the on "start" event

@@ -1,7 +1,5 @@
 <?php
 
-$config = parse_ini_file('./.env');
-
 return [
     'settings' => [
         'displayErrorDetails'    => true, // set to false in production
