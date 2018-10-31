@@ -2,19 +2,15 @@ import time
 import machine
 import dht
 import urequests
-import network
+import connectWifi
 
 from machine import Pin
 from dht import DHT11
 
-url = "YOUR IP"
-
 # Connect to WIFI
-routercon = network.WLAN(network.STA_IF)
-routercon.active()
-routercon.active(True)
-routercon.connect('leco_op', '88888888')
-routercon.ifconfig()
+connectWifi.connect()
+
+url = "YOUR URL"
 
 #Set-up led
 led = machine.Pin(5, machine.Pin.OUT)
@@ -23,10 +19,11 @@ led = machine.Pin(5, machine.Pin.OUT)
 d = DHT11(Pin(4))
 d.measure()
 
+#Proccess transmission.
 while True:
     led.on()
     temperature = d.temperature()
-    response = urequests.post(url + "/new", json={'temperature': temperature, 'location': 'Sensor 2'})
+    response = urequests.post(url, json={'temperature': temperature, 'location': 'Sensor 2'})
     response.close()
     led.off()
     time.sleep(30)
