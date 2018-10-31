@@ -21,14 +21,20 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 });
 
 $app->post('/new', function (Request $request, Response $response, array $args) {
+	$locationParam = $request->getParsedBodyParam('location');
+	$temperatureParam = $request->getParsedBodyParam('temperature');
+	if (!$locationParam || !$temperatureParam) {
+		return $response->withStatus(400, 'Correct params was not supplied.');
+	}
+
 	$stmt = $this->db->prepare("INSERT INTO temperature (location, date, temperature) VALUES (:location, :date, :temperature)");
 	$stmt->bindParam(':location', $location);
 	$stmt->bindParam(':date', $date);
 	$stmt->bindParam(':temperature', $temperature);
 
-	$location = $request->getParam('location');
+	$location = $locationParam;
 	$date = date('Y-m-d H:i:s');
-	$temperature = $request->getParam('temperature');;
+	$temperature = $temperatureParam;
 	$stmt->execute();
 
 	return $response;
